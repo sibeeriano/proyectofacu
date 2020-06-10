@@ -1,0 +1,96 @@
+//ELEGIR MUSICA DE LA LISTA DE MUSICA.JSON Y AGREGARLA A PLAYLIST
+//let fs = require('fs')
+
+//let listacompleta = fs.readFileSync('./musica.json', 'utf-8');
+//let musica = JSON.parse(listacompleta);
+
+//let playlistCompleta = fs.readFileSync('./playlist.json', 'utf-8');
+//let playlistjs = JSON.parse(playlistCompleta);
+let moduloTareas = require('./modulos') //IMPORTANTISIMO PARA TRAER EL MODULO
+let process = require('process');
+let comando = process.argv[2];
+let musica = moduloTareas.leerJSON();
+let playlist = moduloTareas.LeerPlaylistJSON();
+
+switch (comando) { 
+    case 'listar':
+        
+        console.log(" ");      
+        console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");                              
+        console.log("**** ¡H O T            R I G H T              N O W! ****");    
+        console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");   
+        for(let i=0; i < musica.length; i++){
+            console.log ("**" + musica[i].Artista + "**");
+            console.log('              ' + musica[i].Cancion+'');
+            console.log("------------------------------ "); 
+           }    
+            console.log (" ")
+            console.log("****Puede elegir cualquier cancion de esta lista y agregarla a la Playlist con el comando AGREGAR + nombre de la Cancion***")
+            console.log(" ")
+            console.log("No dejes de agregar tus canciones favoritas! ♥")
+        break
+
+    case 'agregar':  
+          
+        let nuevoArtista = process.argv[3];
+        let nuevaCancion = process.argv[4];
+            
+        if (nuevoArtista==undefined){
+            console.log("-----------------------------------------------------------");
+            console.log("Recuerda que primero es el 'Artista' y luego la 'Cancion'! ");
+            console.log("-----------------------------------------------------------");
+            }else if (nuevaCancion==undefined){
+            console.log("-----------------------------------------------------------")
+            console.log("Recuerda que primero es el 'Artista' y luego la 'Cancion'! ")
+            console.log("-----------------------------------------------------------")
+            break}    
+            //playlistjs.push(nuevoIngreso);
+            //let playlistActualizada=JSON.stringify(playlistjs);
+            //fs.writeFileSync('./playlist.json',playlistActualizada,'utf-8');
+           moduloTareas.escribirJSON(nuevoArtista, nuevaCancion);
+           
+           console.log("cancion agregada!");
+
+           break
+    
+    case "playlist":
+    
+        console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");                              
+        console.log("**** ¡A S I    V A    Q U E D A N D O   T U   P L A Y L I S T ! ****");    
+        console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");   
+             
+     
+    for(let i=0; i < playlist.length; i++){
+            console.log("------------------------------ "); 
+            console.log ([i]+'.   ' + "**" + playlist[i].Artista + "**");
+            console.log('              ' + playlist[i].Cancion+'');
+            
+           }  
+         console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");                   
+         console.log("Acordate que podes agregar canciones que no esten listadas, ni te hayamos sugerido!")
+         console.log(" ");       
+         console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");       
+           break
+
+    case undefined:
+            console.log("///////////////////////////////////////////////////////////////////////")
+            console.log("L I S T A    D E    C O M A N D O S : ");
+            console.log(" ")
+            console.log("-LISTAR: Queres saber que es lo mas escuchado del mundo mundial?! ingrea listar!")
+            console.log(" ")
+            console.log("-AGREGAR + 'artista' + 'nombre de su cancion': Agregar una cancion a tu playlist.")
+            console.log("       Te aconsejamos que para una mejor organizacion siempr pongas el artista primero")
+            console.log(" ")
+            console.log("-PLAYLIST: podes matar las ansias y ver como esta quedando tu playlist!")
+            console.log(" ")
+            console.log("Gracias por elegir Prehispofity, algun dia nos modernizaremos ♥.")
+            console.log("///////////////////////////////////////////////////////////////////////")
+        break;
+
+    default:
+            console.log("///////////////////////////////////////////////////////////////////////")
+            console.log("Vuelva a escribir 'node app.js para listar comandos! ");
+            console.log("///////////////////////////////////////////////////////////////////////")
+        break
+       
+    }
